@@ -23,6 +23,11 @@
 
     .reveal-widget-item {
         position: relative;
+
+        @supports (-webkit-overflow-scrolling: touch) {
+            // Force rendering on iOS devices
+            transform: translateZ(0);
+        }
     }
 
     .reveal-widget-item.reveal-left {
