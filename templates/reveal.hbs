@@ -1,7 +1,7 @@
 <div class="reveal-inner component-inner">
     {{> component this}}
     <div class="reveal-widget reveal-component component-widget">
-        <div class="reveal-widget-slider" tabindex="1">
+        <div class="reveal-widget-slider">
             <a href="#" class="reveal-widget-control" aria-label="{{_globals._components._reveal.ariaLabel}}"><div class="reveal-widget-icon icon"></div></a>
             <div class="reveal-widget-item second-item">
                 {{#if second.src}}
@@ -11,12 +11,12 @@
                     <div class="reveal-widget-item-text second">
                         <div class="reveal-widget-item-text-body reveal-second-long dot-ellipsis dot-resize-update" class="a11y-ignore" aria-hidden="true" tab-index="-1">
                             {{{a11y_text second.body}}}
-                            <a href="#" class="reveal-popup-open" tabindex="-1">{{#if second.moreText}}{{second.moreText}}{{else}}More{{/if}}</a>                          
+                            <a href="#" class="reveal-popup-open">{{#if second.moreText}}{{second.moreText}}{{else}}More{{/if}}</a>                          
                         </div>
                     </div>
                 {{/if}}
             </div>
-            <div class="reveal-widget-item first-item" tabindex="2">
+            <div class="reveal-widget-item first-item">
                 {{#if first.src}}
                     <img src="{{first.src}}" class="reveal-image" alt="{{first.alt}}" title="{{first.title}}"/>
                 {{/if}}
@@ -24,7 +24,7 @@
                     <div class="reveal-widget-item-text first">
                         <div class="reveal-widget-item-text-body reveal-first-long dot-ellipsis dot-resize-update">
                             {{{a11y_text first.body}}}
-                             <a href="#" class="reveal-popup-open" tabindex="-1">{{#if first.moreText}}{{first.moreText}}{{else}}More{{/if}}</a>                          
+                             <a href="#" class="reveal-popup-open">{{#if first.moreText}}{{first.moreText}}{{else}}More{{/if}}</a>                          
                         </div>
                     </div>
                 {{/if}}
