@@ -74,8 +74,10 @@ define([
             this.$('div.reveal-widget-item-text-body').addClass('reveal-' + direction);
             this.$('.reveal-widget-icon').addClass('icon-controls-' + this.getOppositeDirection(iconDirection));
 
-            // Change accessibility tab index on page load. 
+            // Change accessibility tab index on page load.
+            this.$('.first .reveal-widget-item-text-body .reveal-popup-open').attr('tabindex', '0');
             this.$('.second .reveal-widget-item-text-body .accessible-text-block').attr('tabindex', '-1');
+            this.$('.second .reveal-widget-item-text-body .reveal-popup-open').attr('tabindex', '-1');
 
             this.model.set('_direction', direction);
             this.model.set('_active', true);
@@ -314,7 +316,9 @@ define([
                 // Modify accessibility tab index and classes to prevent hidden elements from being read before visible elements.
                 this.$('.first .reveal-widget-item-text-body').addClass('a11y-ignore').attr('aria-hidden', 'true').attr('tabindex', '-1');
                 this.$('.second .reveal-widget-item-text-body .accessible-text-block').attr('tabindex', '0');
+                this.$('.second .reveal-widget-item-text-body .reveal-popup-open').attr('tabindex', '0');
                 this.$('.first .reveal-widget-item-text-body .accessible-text-block').attr('tabindex', '-1');
+                this.$('.first .reveal-widget-item-text-body .reveal-popup-open').attr('tabindex', '-1');
 
                 controlAnimation[direction] = operator + controlMovement;
                 classToAdd = 'icon-controls-' + iconDirection;
@@ -331,7 +335,9 @@ define([
                 // Modify accessibility tab index to prevent hidden elements from being read before visible elements.
                 this.$('.second .reveal-widget-item-text-body').addClass('a11y-ignore').attr('aria-hidden', 'true').attr('tabindex', '-1');
                 this.$('.first .reveal-widget-item-text-body .accessible-text-block').attr('tabindex', '0');
+                this.$('.first .reveal-widget-item-text-body .reveal-popup-open').attr('tabindex', '0');
                 this.$('.second .reveal-widget-item-text-body .accessible-text-block').attr('tabindex', '-1');
+                this.$('.second .reveal-widget-item-text-body .reveal-popup-open').attr('tabindex', '-1');
 
                 controlAnimation[direction] = 0;
                 classToAdd = 'icon-controls-' + this.getOppositeDirection(iconDirection);
