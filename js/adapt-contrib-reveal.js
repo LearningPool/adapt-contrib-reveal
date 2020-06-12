@@ -14,13 +14,13 @@ define([
 
         events: function () {
             return Adapt.device.touch == true ? {
-                'click .reveal-widget-control': 'clickReveal',
+                'click .reveal__widget-control': 'clickReveal',
                 'inview':                       'inview',
-                'click .reveal-popup-open':     'openPopup'
+                'click .reveal__popup-open':     'openPopup'
             } : {
-                'click .reveal-widget-control': 'clickReveal',
+                'click .reveal__widget-control': 'clickReveal',
                 'inview':                       'inview',
-                'click .reveal-popup-open' :    'openPopup'
+                'click .reveal__popup-open' :    'openPopup'
             }
         },
 
@@ -66,18 +66,18 @@ define([
             var iconDirection = this.getIconDirection(direction);
 
             // Initialise the directional arrows
-            this.$('.reveal-widget-item').addClass('reveal-' + this.model.get('_direction'));
-            this.$('.reveal-widget-control').addClass('reveal-' + direction);
-            this.$('.reveal-image').addClass('reveal-' + direction);
-            this.$('div.reveal-widget-item-text').addClass('reveal-' + direction);
+            this.$('.reveal__widget-item').addClass('reveal__' + this.model.get('_direction'));
+            this.$('.reveal__widget-control').addClass('reveal__' + direction);
+            this.$('.reveal__image').addClass('reveal__' + direction);
+            this.$('div.reveal__widget-item-text').addClass('reveal__' + direction);
 
-            this.$('div.reveal-widget-item-text-body').addClass('reveal-' + direction);
-            this.$('.reveal-widget-icon').addClass('icon-controls-' + this.getOppositeDirection(iconDirection));
+            this.$('div.reveal__widget-item-text-body').addClass('reveal__' + direction);
+            this.$('.reveal__widget-icon').addClass('icon-controls-' + this.getOppositeDirection(iconDirection));
 
             // Change accessibility tab index on page load.
-            this.$('.first .reveal-widget-item-text-body .reveal-popup-open').attr('tabindex', '0');
-            this.$('.second .reveal-widget-item-text-body .accessible-text-block').attr('tabindex', '-1');
-            this.$('.second .reveal-widget-item-text-body .reveal-popup-open').attr('tabindex', '-1');
+            this.$('.first .reveal__widget-item-text-body .reveal__popup-open').attr('tabindex', '0');
+            this.$('.second .reveal__widget-item-text-body .accessible-text-block').attr('tabindex', '-1');
+            this.$('.second .reveal__widget-item-text-body .reveal__popup-open').attr('tabindex', '-1');
 
             this.model.set('_direction', direction);
             this.model.set('_active', true);
@@ -122,7 +122,7 @@ define([
                     x.height = height;
 
                 // Selector for the 'More' button.
-                x.after = 'a.reveal-popup-open';
+                x.after = 'a.reveal__popup-open';
 
                 $(this).dotdotdot(x);
             });
@@ -131,20 +131,20 @@ define([
         setControlText: function(isRevealed) {
             if (this.model.get('_control')) {
                 if (!isRevealed && this.model.get('control').showText) {
-                    this.$('.reveal-widget-control').attr('title', this.model.get('control').showText);
+                    this.$('.reveal__widget-control').attr('title', this.model.get('control').showText);
                 }
 
                 if (isRevealed && this.model.get('control').hideText) {
-                    this.$('.reveal-widget-control').attr('title', this.model.get('control').hideText);
+                    this.$('.reveal__widget-control').attr('title', this.model.get('control').hideText);
                 }
             }
         },
 
         calculateWidths: function() {
             var direction = this.model.get('_direction');
-            var $widget = this.$('.reveal-widget');
-            var $slider = this.$('.reveal-widget-slider');
-            var $control = this.$('.reveal-widget-control');
+            var $widget = this.$('.reveal__widget');
+            var $slider = this.$('.reveal__widget-slider');
+            var $control = this.$('.reveal__widget-control');
 
             var imageWidth = $widget.width();
             var controlWidth = $control.width();
@@ -159,7 +159,7 @@ define([
             $slider.css('margin-' + direction, margin);
 
             // Ensure the text doesn't overflow the image
-            this.$('div.reveal-widget-item-text').css('width', ($('img.reveal-image').width()));
+            this.$('div.reveal__widget-item-text').css('width', ($('img.reveal__image').width()));
             
             this.model.set('_scrollSize', imageWidth);
             this.model.set('_controlWidth', controlWidth);
@@ -169,10 +169,10 @@ define([
             var direction = this.model.get('_direction');
 
             // Cache the JQuery objects
-            var $widget = this.$('.reveal-widget');
-            var $image = this.$('.reveal-widget img');
-            var $slider = this.$('.reveal-widget-slider');
-            var $control = this.$('.reveal-widget-control');
+            var $widget = this.$('.reveal__widget');
+            var $image = this.$('.reveal__widget img');
+            var $slider = this.$('.reveal__widget-slider');
+            var $control = this.$('.reveal__widget-control');
             var imageHeight = $image.height();
             var controlHeight = $control.height();
             var margin = direction == "top" ? -imageHeight : imageHeight;
@@ -191,7 +191,7 @@ define([
             }
 
             // Ensure the text doesn't overflow the image
-            this.$('div.reveal-widget-item-text').css("height", imageHeight);
+            this.$('div.reveal__widget-item-text').css("height", imageHeight);
 
             this.model.set('_scrollSize', imageHeight);
             this.model.set('_controlWidth', controlHeight);
@@ -204,23 +204,23 @@ define([
         resizeControl: function() {
             var direction = this.model.get('_direction');
             var marginType = this.getMarginType();
-            var $widget = this.$('.reveal-widget');
-            var $slider = this.$('.reveal-widget-slider');
-            var $widgetText = this.$('.reveal-widget-item-text');
+            var $widget = this.$('.reveal__widget');
+            var $slider = this.$('.reveal__widget-slider');
+            var $widgetText = this.$('.reveal__widget-item-text');
             var imageSize;
             var controlSize;
             
             if (this.model.get('_orientation') == this.orientationStates.Horizontal) {
-                var innerSize = this.$('.reveal-inner').width();
+                var innerSize = this.$('.reveal__inner').width();
 
                 imageSize = innerSize != $widget.width() ? innerSize : $widget.width();
-                controlSize = this.$('.reveal-widget-control').width();
+                controlSize = this.$('.reveal__widget-control').width();
                 $widget.css('width', imageSize);
                 $widgetText.css('width', imageSize);
                 $slider.css('width',  imageSize * 2);
             } else {
-                imageSize = this.$('.reveal-widget img').height();
-                controlSize = this.$('.reveal-widget-control').height();
+                imageSize = this.$('.reveal__widget img').height();
+                controlSize = this.$('.reveal__widget-control').height();
                 $widget.css('height', imageSize);
                 $widgetText.css('height', imageSize);
                 $slider.css('height',  imageSize);
@@ -247,7 +247,7 @@ define([
         },
 
         postRender: function () {
-            this.$('.reveal-widget').imageready(_.bind(function() {
+            this.$('.reveal__widget').imageready(_.bind(function() {
                 // IE hack - IE10/11 doesnt play nice with image sizes but it works on IE 9 which is nice. Because the universe doesnt make sense.
                 if ($('html').hasClass('ie')) {
 
@@ -301,7 +301,7 @@ define([
             var classToRemove;
 
             // Clear all disabled accessibility settings 
-            this.$('.reveal-widget-item-text-body').removeClass('a11y-ignore').removeAttr('aria-hidden').removeAttr('tab-index'); 
+            this.$('.reveal__widget-item-text-body').removeClass('a11y-ignore').removeAttr('aria-hidden').removeAttr('tab-index'); 
 
             if (defaultTextDirection === 'right' && (direction == 'left' || direction == 'right')) {
                 marginType = this.getOppositeDirection(marginType);
@@ -311,14 +311,14 @@ define([
             if (!this.model.get('_revealed')) {
                 // reveal second
                 this.model.set('_revealed', true);
-                this.$('.reveal-widget').addClass('reveal-showing');
+                this.$('.reveal__widget').addClass('reveal__showing');
 
                 // Modify accessibility tab index and classes to prevent hidden elements from being read before visible elements.
-                this.$('.first .reveal-widget-item-text-body').addClass('a11y-ignore').attr('aria-hidden', 'true').attr('tabindex', '-1');
-                this.$('.second .reveal-widget-item-text-body .accessible-text-block').attr('tabindex', '0');
-                this.$('.second .reveal-widget-item-text-body .reveal-popup-open').attr('tabindex', '0');
-                this.$('.first .reveal-widget-item-text-body .accessible-text-block').attr('tabindex', '-1');
-                this.$('.first .reveal-widget-item-text-body .reveal-popup-open').attr('tabindex', '-1');
+                this.$('.first .reveal__widget-item-text-body').addClass('a11y-ignore').attr('aria-hidden', 'true').attr('tabindex', '-1');
+                this.$('.second .reveal__widget-item-text-body .accessible-text-block').attr('tabindex', '0');
+                this.$('.second .reveal__widget-item-text-body .reveal__popup-open').attr('tabindex', '0');
+                this.$('.first .reveal__widget-item-text-body .accessible-text-block').attr('tabindex', '-1');
+                this.$('.first .reveal__widget-item-text-body .reveal__popup-open').attr('tabindex', '-1');
 
                 controlAnimation[direction] = operator + controlMovement;
                 classToAdd = 'icon-controls-' + iconDirection;
@@ -330,14 +330,14 @@ define([
             } else {
                 //show first
                 this.model.set('_revealed', false);
-                this.$('.reveal-widget').removeClass('reveal-showing');
+                this.$('.reveal__widget').removeClass('reveal__showing');
 
                 // Modify accessibility tab index to prevent hidden elements from being read before visible elements.
-                this.$('.second .reveal-widget-item-text-body').addClass('a11y-ignore').attr('aria-hidden', 'true').attr('tabindex', '-1');
-                this.$('.first .reveal-widget-item-text-body .accessible-text-block').attr('tabindex', '0');
-                this.$('.first .reveal-widget-item-text-body .reveal-popup-open').attr('tabindex', '0');
-                this.$('.second .reveal-widget-item-text-body .accessible-text-block').attr('tabindex', '-1');
-                this.$('.second .reveal-widget-item-text-body .reveal-popup-open').attr('tabindex', '-1');
+                this.$('.second .reveal__widget-item-text-body').addClass('a11y-ignore').attr('aria-hidden', 'true').attr('tabindex', '-1');
+                this.$('.first .reveal__widget-item-text-body .accessible-text-block').attr('tabindex', '0');
+                this.$('.first .reveal__widget-item-text-body .reveal__popup-open').attr('tabindex', '0');
+                this.$('.second .reveal__widget-item-text-body .accessible-text-block').attr('tabindex', '-1');
+                this.$('.second .reveal__widget-item-text-body .reveal__popup-open').attr('tabindex', '-1');
 
                 controlAnimation[direction] = 0;
                 classToAdd = 'icon-controls-' + this.getOppositeDirection(iconDirection);
@@ -346,8 +346,8 @@ define([
                 sliderAnimation['margin-' + marginType] = (direction == marginType) ? operator + controlMovement : 0;
             }
             // Change the UI to handle the new state
-            this.$('.reveal-widget-slider').animate(sliderAnimation);
-            this.$('.reveal-widget-icon').removeClass(classToRemove).addClass(classToAdd);
+            this.$('.reveal__widget-slider').animate(sliderAnimation);
+            this.$('.reveal__widget-icon').removeClass(classToRemove).addClass(classToAdd);
 
             this.setControlText(this.model.get('_revealed'));
         },

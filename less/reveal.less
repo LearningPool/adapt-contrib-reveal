@@ -1,9 +1,9 @@
-.reveal-component {
-    .reveal-widget {
+.reveal.component {
+    .reveal__widget {
         position: relative;
     }
 
-    .reveal-widget-icon {
+    .reveal__widget-icon {
         color: @item-text-color;
         left: 0;
         position: absolute;
@@ -21,7 +21,7 @@
         }
     }
 
-    .reveal-widget-item {
+    .reveal__widget-item {
         position: relative;
 
         @supports (-webkit-overflow-scrolling: touch) {
@@ -30,38 +30,38 @@
         }
     }
 
-    .reveal-widget-item.reveal-left {
+    .reveal__widget-item.reveal__left {
         float: left;
         width: 50%;
     }
 
-    .reveal-widget-item.reveal-right {
+    .reveal__widget-item.reveal__right {
         float: right;
         width: 50%;
     }
 
-    .reveal-image {
+    .reveal__image {
         display: block;
     }
 
-    .reveal-image.reveal-right {
+    .reveal__image.reveal__right {
         float: right;
     }
 
-    .reveal-image.reveal-left {
+    .reveal__image.reveal__left {
         float: left;
     }
 
-    .reveal-widget {
+    .reveal__widget {
         overflow: hidden;
     }
 
-    .reveal-widget-slider {
+    .reveal__widget-slider {
         margin-left: 0;
     }
 }
 
-.reveal-widget-control {
+.reveal__widget-control {
     background-color: darken(@item-color, 15%);
     background-color: fade(darken(@item-color, 15%), 70%);
     height: 100%;
@@ -69,23 +69,23 @@
     width: 50px;
     z-index: 5;
 
-    &.reveal-left {
+    &.reveal__left {
         left: 0;
         top: 0;
     }
 
-    &.reveal-right {
+    &.reveal__right {
         right: 0;
         top: 0;
     }
 
-    &.reveal-top {
+    &.reveal__top {
         height: 50px;
         width: 100%;
         top: 0;
     }
 
-    &.reveal-bottom {
+    &.reveal__bottom {
         height: 50px;
         width: 100%;
         top: auto;
@@ -99,25 +99,25 @@
     }
 }
 
-div.reveal-widget-item-text {
+div.reveal__widget-item-text {
     position: absolute;
     width: 100% !important;
     height: 100%;
     top: 0;
     z-index: 1;
 
-   &.reveal-left {
+   &.reveal__left {
         left: 0;
         top: 0;
     }
 
-    &.reveal-right {
+    &.reveal__right {
         right: 0;
         top: 0;
     }
 }
 
-div.reveal-widget-item-text-body {
+div.reveal__widget-item-text-body {
   background-color: rgba(0, 0, 0, 0.4);
   border: none;
   box-sizing: border-box;
@@ -133,12 +133,12 @@ div.reveal-widget-item-text-body {
   z-index: -1;
 
   &:not(.is-truncated) {
-      .reveal-popup-open {
+      .reveal__popup-open {
           display: none;
       }
   }
 
-  &.reveal-left {
+  &.reveal__left {
     top: 0;
     padding: 40px 40px 60px 90px;
 
@@ -152,7 +152,7 @@ div.reveal-widget-item-text-body {
 
   }
 
-  &.reveal-right {
+  &.reveal__right {
     top: 0;
     padding: 40px 90px 60px 37.5px;
 
@@ -166,12 +166,12 @@ div.reveal-widget-item-text-body {
 
   }
 
-  &.reveal-top,
-  &.reveal-bottom {
+  &.reveal__top,
+  &.reveal__bottom {
     padding: 40px 37.5px 60px 37.5px;
   }
 
-  &.reveal-top {
+  &.reveal__top {
     bottom: 0;
     padding-top: 90px !important;
     position: absolute;
@@ -188,7 +188,7 @@ div.reveal-widget-item-text-body {
 
   }
 
-  &.reveal-bottom {
+  &.reveal__bottom {
     bottom: auto;
     padding-bottom: 90px !important;
     position: absolute;
@@ -203,7 +203,7 @@ div.reveal-widget-item-text-body {
   }
 }
 
-.reveal-popup {
+.reveal__popup {
     width: 100%;
     height: 100%;
     display: block;
@@ -216,21 +216,21 @@ div.reveal-widget-item-text-body {
     border:@item-border;
 }
 
-.reveal-popup-inner {
+.reveal__popup-inner {
     padding:@item-padding;
 }
 
-.reveal-popup-toolbar-title {
+.reveal__popup-toolbar-title {
     margin-bottom: 10px;
     float: left;
     width: 80%;
 }
 
-.reveal-popup-content {
+.reveal__popup-content {
     overflow-y: auto;
 }
 
-.reveal-popup-open {
+.reveal__popup-open {
     color: @item-text-color;
     background-color: @button-color;
     display: inline;
@@ -245,7 +245,7 @@ div.reveal-widget-item-text-body {
         }
     }
 
-    .reveal-icon-plus {
+    .reveal__icon-plus {
         display: inline;
         display: none;
         text-align: right;
@@ -254,7 +254,7 @@ div.reveal-widget-item-text-body {
     }
 }
 
-.reveal-link-text {
+.reveal__link-text {
     margin-top: 10px;
     display: block;
     position: absolute;
@@ -262,21 +262,21 @@ div.reveal-widget-item-text-body {
     bottom: 3%;
     z-index: 9;
 
-    .reveal-bottom & {
+    .reveal__bottom & {
         bottom: 51px;
     }
 
-    .reveal-right & {
+    .reveal__right & {
         right: 51px;
     }
 }
 
-.reveal-hidden {
+.reveal__hidden {
     display:none !important;
 }
 
 .no-touch {
-    .reveal-link-text {
+    .reveal__link-text {
         &:hover {
             color: @item-text-hover-color;
         }
