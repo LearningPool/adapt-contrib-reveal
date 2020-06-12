@@ -1,120 +1,120 @@
 .reveal.component {
-    .reveal__widget {
-        position: relative;
+  .reveal__widget {
+    position: relative;
+  }
+
+  .reveal__widget-icon {
+    color: @item-text-color;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    vertical-align: middle;
+    width: 100%;
+
+    &.icon-controls-up {
+      top: 25%;
     }
 
-    .reveal__widget-icon {
-        color: @item-text-color;
-        left: 0;
-        position: absolute;
-        text-align: center;
-        top: 50%;
-        vertical-align: middle;
-        width: 100%;
-
-        &.icon-controls-up {
-            top: 25%;
-        }
-
-        &.icon-controls-down {
-            top: 25%;
-        }
+    &.icon-controls-down {
+      top: 25%;
     }
+  }
 
-    .reveal__widget-item {
-        position: relative;
+  .reveal__widget-item {
+    position: relative;
 
-        @supports (-webkit-overflow-scrolling: touch) {
-            // Force rendering on iOS devices
-            transform: translateZ(0);
-        }
+    @supports (-webkit-overflow-scrolling: touch) {
+      // Force rendering on iOS devices
+      transform: translateZ(0);
     }
+  }
 
-    .reveal__widget-item.reveal__left {
-        float: left;
-        width: 50%;
-    }
+  .reveal__widget-item.reveal__left {
+    float: left;
+    width: 50%;
+  }
 
-    .reveal__widget-item.reveal__right {
-        float: right;
-        width: 50%;
-    }
+  .reveal__widget-item.reveal__right {
+    float: right;
+    width: 50%;
+  }
 
-    .reveal__image {
-        display: block;
-    }
+  .reveal__image {
+    display: block;
+  }
 
-    .reveal__image.reveal__right {
-        float: right;
-    }
+  .reveal__image.reveal__right {
+    float: right;
+  }
 
-    .reveal__image.reveal__left {
-        float: left;
-    }
+  .reveal__image.reveal__left {
+    float: left;
+  }
 
-    .reveal__widget {
-        overflow: hidden;
-    }
+  .reveal__widget {
+    overflow: hidden;
+  }
 
-    .reveal__widget-slider {
-        margin-left: 0;
-    }
+  .reveal__widget-slider {
+    margin-left: 0;
+  }
 }
 
 .reveal__widget-control {
+  background-color: darken(@item-color, 15%);
+  background-color: fade(darken(@item-color, 15%), 70%);
+  height: 100%;
+  position: absolute;
+  width: 50px;
+  z-index: 5;
+
+  &.reveal__left {
+    left: 0;
+    top: 0;
+  }
+
+  &.reveal__right {
+    right: 0;
+    top: 0;
+  }
+
+  &.reveal__top {
+    height: 50px;
+    width: 100%;
+    top: 0;
+  }
+
+  &.reveal__bottom {
+    height: 50px;
+    width: 100%;
+    top: auto;
+    bottom: 0;
+  }
+
+  &:hover {
     background-color: darken(@item-color, 15%);
-    background-color: fade(darken(@item-color, 15%), 70%);
-    height: 100%;
-    position: absolute;
-    width: 50px;
-    z-index: 5;
-
-    &.reveal__left {
-        left: 0;
-        top: 0;
-    }
-
-    &.reveal__right {
-        right: 0;
-        top: 0;
-    }
-
-    &.reveal__top {
-        height: 50px;
-        width: 100%;
-        top: 0;
-    }
-
-    &.reveal__bottom {
-        height: 50px;
-        width: 100%;
-        top: auto;
-        bottom: 0;
-    }
-
-    &:hover {
-        background-color: darken(@item-color, 15%);
-        background-color: fade(darken(@item-color, 15%), 90%);
-        cursor: pointer;
-    }
+    background-color: fade(darken(@item-color, 15%), 90%);
+    cursor: pointer;
+  }
 }
 
 div.reveal__widget-item-text {
-    position: absolute;
-    width: 100% !important;
-    height: 100%;
+  position: absolute;
+  width: 100% !important;
+  height: 100%;
+  top: 0;
+  z-index: 1;
+
+  &.reveal__left {
+    left: 0;
     top: 0;
-    z-index: 1;
+  }
 
-   &.reveal__left {
-        left: 0;
-        top: 0;
-    }
-
-    &.reveal__right {
-        right: 0;
-        top: 0;
-    }
+  &.reveal__right {
+    right: 0;
+    top: 0;
+  }
 }
 
 div.reveal__widget-item-text-body {
@@ -133,9 +133,9 @@ div.reveal__widget-item-text-body {
   z-index: -1;
 
   &:not(.is-truncated) {
-      .reveal__popup-open {
-          display: none;
-      }
+    .reveal__popup-open {
+      display: none;
+    }
   }
 
   &.reveal__left {
@@ -143,11 +143,11 @@ div.reveal__widget-item-text-body {
     padding: 40px 40px 60px 90px;
 
     @media only screen and (min-width: @device-width-small) {
-        padding-right: 52.5px;
+      padding-right: 52.5px;
     }
 
     @media only screen and (min-width: @device-width-medium) {
-        padding-right: 60px;
+      padding-right: 60px;
     }
 
   }
@@ -157,11 +157,11 @@ div.reveal__widget-item-text-body {
     padding: 40px 90px 60px 37.5px;
 
     @media only screen and (min-width: @device-width-small) {
-        padding-left: 52.5px;
+      padding-left: 52.5px;
     }
 
-    @media only screen and (min-width: @device-width-medium)  {
-        padding-left: 60px;
+    @media only screen and (min-width: @device-width-medium) {
+      padding-left: 60px;
     }
 
   }
@@ -179,11 +179,11 @@ div.reveal__widget-item-text-body {
 
 
     @media only screen and (min-width: @device-width-small) {
-        padding: 90px 52.5px 60px 52.5px;
+      padding: 90px 52.5px 60px 52.5px;
     }
 
     @media only screen and (min-width: @device-width-medium) {
-        padding: 90px 60px 60px 60px;
+      padding: 90px 60px 60px 60px;
     }
 
   }
@@ -195,90 +195,93 @@ div.reveal__widget-item-text-body {
     z-index: 1;
 
     @media only screen and (min-width: @device-width-small) {
-        padding: 40px 52.5px 60px 52.5px;
+      padding: 40px 52.5px 60px 52.5px;
     }
+
     @media only screen and (min-width: @device-width-medium) {
-        padding: 90px 60px 60px 60px;
+      padding: 90px 60px 60px 60px;
     }
   }
 }
 
 .reveal__popup {
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 500;
-    background-color: @inverted-background-color;
-    color: @inverted-foreground-color;
-    border:@item-border;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 500;
+  background-color: @inverted-background-color;
+  color: @inverted-foreground-color;
+  border: @item-border;
 }
 
 .reveal__popup-inner {
-    padding:@item-padding;
+  padding: @item-padding;
 }
 
 .reveal__popup-toolbar-title {
-    margin-bottom: 10px;
-    float: left;
-    width: 80%;
+  margin-bottom: 10px;
+  float: left;
+  width: 80%;
 }
 
 .reveal__popup-content {
-    overflow-y: auto;
+  overflow-y: auto;
 }
 
 .reveal__popup-open {
-    color: @item-text-color;
-    background-color: @button-color;
-    display: inline;
-    line-height: 100%;
-    padding: 3px 5px;
-    text-decoration: none;
-    z-index: 500;
-    .icon {
-        color: @inverted-foreground-color;
-        &:hover {
-            color: lighten(@inverted-background-color, 30%);
-        }
-    }
+  color: @item-text-color;
+  background-color: @button-color;
+  display: inline;
+  line-height: 100%;
+  padding: 3px 5px;
+  text-decoration: none;
+  z-index: 500;
 
-    .reveal__icon-plus {
-        display: inline;
-        display: none;
-        text-align: right;
-        vertical-align: text-top;
-        width: 100%;
+  .icon {
+    color: @inverted-foreground-color;
+
+    &:hover {
+      color: lighten(@inverted-background-color, 30%);
     }
+  }
+
+  .reveal__icon-plus {
+    display: inline;
+    display: none;
+    text-align: right;
+    vertical-align: text-top;
+    width: 100%;
+  }
 }
 
 .reveal__link-text {
-    margin-top: 10px;
-    display: block;
-    position: absolute;
-    right: 12%;
-    bottom: 3%;
-    z-index: 9;
+  margin-top: 10px;
+  display: block;
+  position: absolute;
+  right: 12%;
+  bottom: 3%;
+  z-index: 9;
 
-    .reveal__bottom & {
-        bottom: 51px;
-    }
+  .reveal__bottom & {
+    bottom: 51px;
+  }
 
-    .reveal__right & {
-        right: 51px;
-    }
+  .reveal__right & {
+    right: 51px;
+  }
 }
 
 .reveal__hidden {
-    display:none !important;
+  display: none !important;
 }
 
 .no-touch {
-    .reveal__link-text {
-        &:hover {
-            color: @item-text-hover-color;
-        }
+  .reveal__link-text {
+    &:hover {
+      color: @item-text-hover-color;
     }
+  }
 }
