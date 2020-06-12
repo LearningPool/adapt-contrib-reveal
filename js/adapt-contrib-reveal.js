@@ -10,9 +10,8 @@ define([
 ], function (Adapt, ComponentView, dotdotdot) {
   'use strict';
 
-  var Reveal = ComponentView.extend({
-
-    events: function () {
+  class Reveal extends ComponentView {
+    events() {
       return Adapt.device.touch == true ? {
         'click .reveal__widget-control': 'clickReveal',
         'inview': 'inview',
@@ -22,14 +21,16 @@ define([
           'inview': 'inview',
           'click .reveal__popup-open': 'openPopup'
         }
-    },
+    }
 
-    orientationStates: {
-      Vertical: 'vertical',
-      Horizontal: 'horizontal'
-    },
+    get orientationStates() {
+      return {
+        Vertical: 'vertical',
+        Horizontal: 'horizontal'
+      }
+    }
 
-    preRender: function () {
+    preRender() {
       var orientation;
       this.listenTo(Adapt, 'device:resize', this.resizeControl, this);
 
@@ -50,18 +51,18 @@ define([
       this.model.set('_defaultTextDirection', defaultTextDirection);
 
       this.checkIfResetOnRevisit();
-    },
+    }
 
-    checkIfResetOnRevisit: function () {
+    checkIfResetOnRevisit() {
       var isResetOnRevisit = this.model.get('_isResetOnRevisit');
 
       // If reset is enabled set defaults
       if (isResetOnRevisit) {
         this.model.reset(isResetOnRevisit);
       }
-    },
+    }
 
-    setupReveal: function () {
+    setupReveal() {
       var direction = !this.model.get('_direction') ? "left" : this.model.get('_direction');
       var iconDirection = this.getIconDirection(direction);
 
@@ -126,9 +127,9 @@ define([
 
         $(this).dotdotdot(x);
       });
-    },
+    }
 
-    setControlText: function (isRevealed) {
+    setControlText(isRevealed) {
       if (this.model.get('_control')) {
         if (!isRevealed && this.model.get('control').showText) {
           this.$('.reveal__widget-control').attr('title', this.model.get('control').showText);
@@ -138,9 +139,9 @@ define([
           this.$('.reveal__widget-control').attr('title', this.model.get('control').hideText);
         }
       }
-    },
+    }
 
-    calculateWidths: function () {
+    calculateWidths() {
       var direction = this.model.get('_direction');
       var $widget = this.$('.reveal__widget');
       var $slider = this.$('.reveal__widget-slider');
@@ -163,9 +164,9 @@ define([
 
       this.model.set('_scrollSize', imageWidth);
       this.model.set('_controlWidth', controlWidth);
-    },
+    }
 
-    calculateHeights: function () {
+    calculateHeights() {
       var direction = this.model.get('_direction');
 
       // Cache the JQuery objects
@@ -195,13 +196,13 @@ define([
 
       this.model.set('_scrollSize', imageHeight);
       this.model.set('_controlWidth', controlHeight);
-    },
+    }
 
-    getMarginType: function () {
+    getMarginType() {
       return this.model.get('_orientation') == this.orientationStates.Horizontal ? 'left' : 'top';
-    },
+    }
 
-    resizeControl: function () {
+    resizeControl() {
       var direction = this.model.get('_direction');
       var marginType = this.getMarginType();
       var $widget = this.$('.reveal__widget');
@@ -244,9 +245,9 @@ define([
 
       this.model.set('_scrollSize', imageSize);
       this.model.set('_controlWidth', controlSize);
-    },
+    }
 
-    postRender: function () {
+    postRender() {
       this.$('.reveal__widget').imageready(_.bind(function () {
         // IE hack - IE10/11 doesnt play nice with image sizes but it works on IE 9 which is nice. Because the universe doesnt make sense.
         if ($('html').hasClass('ie')) {
@@ -263,9 +264,9 @@ define([
           this.setReadyStatus();
         }
       }, this));
-    },
+    }
 
-    getOppositeDirection: function (direction) {
+    getOppositeDirection(direction) {
       var o = {
         'left': 'right',
         'right': 'left',
@@ -274,17 +275,17 @@ define([
       };
 
       return o[direction];
-    },
+    }
 
-    getIconDirection: function (direction) {
+    getIconDirection(direction) {
       if (this.model.get('_orientation') == this.orientationStates.Vertical) {
         return (direction == 'top') ? 'up' : 'down';
       } else {
         return direction;
       }
-    },
+    }
 
-    clickReveal: function (event) {
+    clickReveal(event) {
       event.preventDefault();
 
       var direction = this.model.get('_direction');
@@ -350,9 +351,9 @@ define([
       this.$('.reveal__widget-icon').removeClass(classToRemove).addClass(classToAdd);
 
       this.setControlText(this.model.get('_revealed'));
-    },
+    }
 
-    openPopup: function (event) {
+    openPopup(event) {
       event.preventDefault();
 
       this.model.set('_active', false);
@@ -368,9 +369,7 @@ define([
 
       Adapt.notify.popup(popupObject);
     }
-  });
+  };
 
-  Adapt.register("reveal", Reveal);
-
-  return Reveal;
+  return Adapt.register("reveal", Reveal);
 });
