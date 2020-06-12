@@ -366,7 +366,7 @@ define([
         body: bodyText
       };
 
-      Adapt.trigger('notify:popup', popupObject);
+      Adapt.notify.popup(popupObject);
     }
   });
 
