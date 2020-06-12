@@ -61,7 +61,7 @@
   background-color: fade(darken(@item-color, 15%), 70%);
   height: 100%;
   position: absolute;
-  width: 50px;
+  width: 3.125rem;
   z-index: 5;
 
   &.reveal__left {
@@ -75,13 +75,13 @@
   }
 
   &.reveal__top {
-    height: 50px;
+    height: 3.125rem;
     width: 100%;
     top: 0;
   }
 
   &.reveal__bottom {
-    height: 50px;
+    height: 3.125rem;
     width: 100%;
     top: auto;
     bottom: 0;
@@ -127,65 +127,65 @@ div.reveal__widget-item-text-body {
   }
 
   &.reveal__left {
-    padding: 40px 40px 60px 90px;
+    padding: 2.5rem 2.5rem 3.75rem 5.625rem;
 
     @media only screen and (min-width: @device-width-small) {
-      padding-right: 52.5px;
+      padding-right: 3.28125rem;
     }
 
     @media only screen and (min-width: @device-width-medium) {
-      padding-right: 60px;
+      padding-right: 3.75rem;
     }
 
   }
 
   &.reveal__right {
-    padding: 40px 90px 60px 37.5px;
+    padding: 2.5rem 5.625rem 3.75rem 2.34rem;
 
     @media only screen and (min-width: @device-width-small) {
-      padding-left: 52.5px;
+      padding-left: 3.28125rem;
     }
 
     @media only screen and (min-width: @device-width-medium) {
-      padding-left: 60px;
+      padding-left: 3.75rem;
     }
 
   }
 
   &.reveal__top,
   &.reveal__bottom {
-    padding: 40px 37.5px 60px 37.5px;
+    padding: 2.5rem 2.34rem 3.75rem 2.34rem;
   }
 
   &.reveal__top {
     bottom: 0;
-    padding-top: 90px !important;
+    padding-top: 5.625rem !important;
     position: absolute;
     z-index: 1;
 
 
     @media only screen and (min-width: @device-width-small) {
-      padding: 90px 52.5px 60px 52.5px;
+      padding: 5.625rem 3.28rem 3.75rem 3.28125rem;
     }
 
     @media only screen and (min-width: @device-width-medium) {
-      padding: 90px 60px 60px 60px;
+      padding: 5.625rem 3.75rem 3.75rem 3.75rem;
     }
 
   }
 
   &.reveal__bottom {
     bottom: auto;
-    padding-bottom: 90px !important;
+    padding-bottom: 5.625rem !important;
     position: absolute;
     z-index: 1;
 
     @media only screen and (min-width: @device-width-small) {
-      padding: 40px 52.5px 60px 52.5px;
+      padding: 2.5rem 3.28rem 3.75rem 3.28rem;
     }
 
     @media only screen and (min-width: @device-width-medium) {
-      padding: 90px 60px 60px 60px;
+      padding: 5.625rem 3.75rem 3.75rem 3.75rem;
     }
   }
 }
