@@ -13,15 +13,15 @@ define([
 
   class Reveal extends ComponentView {
 
-    constructor() {
-      super();
-
-      this.events = {
+    events() {
+      return {
         'click .reveal__widget-control': 'clickReveal',
         inview: 'inview',
         'click .reveal__popup-open': 'openPopup'
       };
+    }
 
+    initialize() {
       this.orientationStates = {
         Vertical: 'vertical',
         Horizontal: 'horizontal'
@@ -33,6 +33,8 @@ define([
         up: 'down',
         down: 'up'
       };
+
+      super.initialize();
     }
 
     preRender() {
@@ -103,16 +105,16 @@ define([
         this.calculateHeights();
       }
 
-      this.$('.dot-ellipsis').each(() => {
+      this.$('.dot-ellipsis').each((index, element) => {
         // Checking if update on window resize required.
-        const watchWindow = $(this).hasClass('dot-resize-update');
+        const watchWindow = $(element).hasClass('dot-resize-update');
 
         // Checking if update on timer required.
-        const watchTimer = $(this).hasClass('dot-timer-update');
+        const watchTimer = $(element).hasClass('dot-timer-update');
 
         // Checking if height set.
         let height = 0;
-        const classList = $(this).attr('class').split(/\s+/);
+        const classList = $(element).attr('class').split(/\s+/);
         $.each(classList, (index, item) => {
           const matchResult = item.match(/^dot-height-(\d+)$/);
           if (matchResult !== null) height = Number(matchResult[1]);
@@ -127,7 +129,7 @@ define([
         // Selector for the 'More' button.
         x.after = 'a.reveal__popup-open';
 
-        $(this).dotdotdot(x);
+        $(element).dotdotdot(x);
       });
     }
 
@@ -253,12 +255,9 @@ define([
       this.$('.reveal__widget').imageready(() => {
         // IE hack - IE11 doesnt play nice with image sizes
         if ($('html').hasClass('ie')) {
-
-          const self = this;
-
           _.delay(() => {
-            self.setupReveal();
-            self.setReadyStatus();
+            this.setupReveal();
+            this.setReadyStatus();
           }, 400);
 
         } else {
@@ -276,8 +275,8 @@ define([
       if (this.model.get('_orientation') === this.orientationStates.Vertical) {
         return (direction === 'top') ? 'up' : 'down';
       }
-      return direction;
 
+      return direction;
     }
 
     clickReveal(event) {
