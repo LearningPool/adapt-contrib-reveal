@@ -2,17 +2,13 @@
   {{> component this}}
   <div class="reveal__widget reveal__component component__widget">
     <div class="reveal__widget-slider">
-      <a href="#" class="reveal__widget-control" aria-label="{{_globals._components._reveal.ariaLabel}}">
-        <div class="reveal__widget-icon icon"></div>
-      </a>
-      <div class="reveal__widget-item second-item">
+      <div class="reveal__widget-item second-item" aria-hidden="true" tabindex="-1">
         {{#if second.src}}
         <img src="{{second.src}}" class="reveal__image" alt="{{second.alt}}" title="{{second.title}}" />
         {{/if}}
         {{#if second.body}}
         <div class="reveal__widget-item-text second">
-          <div class="reveal__widget-item-text-body reveal__second-long dot-ellipsis dot-resize-update"
-            class="a11y-ignore" aria-hidden="true" tab-index="-1">
+          <div class="reveal__widget-item-text-body reveal__second-long dot-ellipsis dot-resize-update">
             {{{second.body}}}
             <a href="#" class="reveal__popup-open">{{#if second.moreText}}{{second.moreText}}{{else}}More{{/if}}</a>
           </div>
@@ -32,6 +28,9 @@
         </div>
         {{/if}}
       </div>
+      <a href="#" class="reveal__widget-control" aria-label="{{_globals._components._reveal.ariaLabel}}">
+        <div class="reveal__widget-icon icon"></div>
+      </a>
     </div>
   </div>
 </div>

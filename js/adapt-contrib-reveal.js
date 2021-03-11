@@ -83,11 +83,6 @@ define([
       this.$('div.reveal__widget-item-text-body').addClass(`reveal__${direction}`);
       this.$('.reveal__widget-icon').addClass(`icon-controls-${this.getOppositeDirection(iconDirection)}`);
 
-      // Change accessibility tab index on page load.
-      this.$('.first .reveal__widget-item-text-body .reveal__popup-open').attr('tabindex', '0');
-      this.$('.second .reveal__widget-item-text-body .accessible-text-block').attr('tabindex', '-1');
-      this.$('.second .reveal__widget-item-text-body .reveal__popup-open').attr('tabindex', '-1');
-
       this.model.set('_direction', direction);
       this.model.set('_active', true);
       this.model.set('_revealed', false);
@@ -134,14 +129,13 @@ define([
     }
 
     setControlText(isRevealed) {
-      if (this.model.get('_control')) {
-        if (!isRevealed && this.model.get('control').showText) {
-          this.$('.reveal__widget-control').attr('title', this.model.get('control').showText);
-        }
+      if (!this.model.get('_control')) return;
+      if (!isRevealed && this.model.get('control').showText) {
+        this.$('.reveal__widget-control').attr('title', this.model.get('control').showText);
+      }
 
-        if (isRevealed && this.model.get('control').hideText) {
-          this.$('.reveal__widget-control').attr('title', this.model.get('control').hideText);
-        }
+      if (isRevealed && this.model.get('control').hideText) {
+        this.$('.reveal__widget-control').attr('title', this.model.get('control').hideText);
       }
     }
 
@@ -292,65 +286,51 @@ define([
       const defaultTextDirection = this.model.get('_defaultTextDirection');
       const controlAnimation = {};
       const sliderAnimation = {};
-      let classToAdd;
-      let classToRemove;
-
-      // Clear all disabled accessibility settings
-      this.$('.reveal__widget-item-text-body').removeClass('a11y-ignore').removeAttr('aria-hidden').removeAttr('tab-index');
 
       if (defaultTextDirection === 'right' && (direction === 'left' || direction === 'right')) {
         marginType = this.getOppositeDirection(marginType);
       }
 
-      // Define the animations and new icon styles
-      if (!this.model.get('_revealed')) {
-        // reveal second
-        this.model.set('_revealed', true);
-        this.$('.reveal__widget').addClass('reveal__showing');
+      const firstItem = this.$('.first-item.reveal__widget-item');
+      const secondItem = this.$('.second-item.reveal__widget-item');
+      const isItemRevealed = this.model.get('_revealed');
 
-        /**
+       /**
          * Modify accessibility tab index and classes
          * to prevent hidden elements from being read before visible elements.
          */
-        this.$('.first .reveal__widget-item-text-body').addClass('a11y-ignore').attr('aria-hidden', 'true').attr('tabindex', '-1');
-        this.$('.second .reveal__widget-item-text-body .accessible-text-block').attr('tabindex', '0');
-        this.$('.second .reveal__widget-item-text-body .reveal__popup-open').attr('tabindex', '0');
-        this.$('.first .reveal__widget-item-text-body .accessible-text-block').attr('tabindex', '-1');
-        this.$('.first .reveal__widget-item-text-body .reveal__popup-open').attr('tabindex', '-1');
+      Adapt.a11y.toggleAccessibleEnabled(firstItem, isItemRevealed);
+      Adapt.a11y.toggleAccessibleEnabled(secondItem, !isItemRevealed);
 
+      // show first or reveal second item
+      this.$('.reveal__widget').toggleClass('reveal__showing', !isItemRevealed);
+
+      // Define the animations and new icon styles
+      if (!isItemRevealed) {
         controlAnimation[direction] = operator + controlMovement;
-        classToAdd = `icon-controls-${iconDirection}`;
-        classToRemove = `icon-controls-${this.getOppositeDirection(iconDirection)}`;
-
         sliderAnimation[`margin-${marginType}`] = (direction === marginType) ? 0 : -scrollSize;
 
         this.setCompletionStatus();
       } else {
-        // show first
-        this.model.set('_revealed', false);
-        this.$('.reveal__widget').removeClass('reveal__showing');
-
-        /**
-         * Modify accessibility tab index and classes
-         * to prevent hidden elements from being read before visible elements.
-         */
-        this.$('.second .reveal__widget-item-text-body').addClass('a11y-ignore').attr('aria-hidden', 'true').attr('tabindex', '-1');
-        this.$('.first .reveal__widget-item-text-body .accessible-text-block').attr('tabindex', '0');
-        this.$('.first .reveal__widget-item-text-body .reveal__popup-open').attr('tabindex', '0');
-        this.$('.second .reveal__widget-item-text-body .accessible-text-block').attr('tabindex', '-1');
-        this.$('.second .reveal__widget-item-text-body .reveal__popup-open').attr('tabindex', '-1');
-
         controlAnimation[direction] = 0;
-        classToAdd = `icon-controls-${this.getOppositeDirection(iconDirection)}`;
-        classToRemove = `icon-controls-${iconDirection}`;
-
         sliderAnimation[`margin-${marginType}`] = (direction === marginType) ? operator + controlMovement : 0;
       }
-      // Change the UI to handle the new state
-      this.$('.reveal__widget-slider').animate(sliderAnimation);
-      this.$('.reveal__widget-icon').removeClass(classToRemove).addClass(classToAdd);
 
-      this.setControlText(this.model.get('_revealed'));
+      // Change the UI to handle the new state
+      const classIconHide = `icon-controls-${this.getOppositeDirection(iconDirection)}`;
+      const classIconReveal = `icon-controls-${iconDirection}`;
+
+      this.$('.reveal__widget-slider').animate(sliderAnimation);
+      this.$('.reveal__widget-icon').toggleClass(classIconHide, isItemRevealed);
+      this.$('.reveal__widget-icon').toggleClass(classIconReveal, !isItemRevealed);
+
+      this.model.set('_revealed', !isItemRevealed);
+      this.setControlText(!isItemRevealed);
+
+      // focus on the image after the transition has ended
+      this.$('.reveal__widget-slider').one('transitionend', () => {
+        Adapt.a11y.focusFirst(this.$('.reveal__widget-item:not(.aria-hidden)'));
+      });
     }
 
     openPopup(event) {
